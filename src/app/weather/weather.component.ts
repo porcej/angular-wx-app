@@ -12,9 +12,10 @@ export interface WeatherResponse {
 }
 
 @Component({
-  selector: 'app-weather',
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.css'],
+    selector: 'app-weather',
+    templateUrl: './weather.component.html',
+    styleUrls: ['./weather.component.css'],
+    standalone: false
 })
 export class WeatherComponent implements OnInit {
   weatherSearchForm: UntypedFormGroup;
