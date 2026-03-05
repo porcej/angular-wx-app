@@ -11,7 +11,7 @@
             aria-describedby="weatherLocation"
             placeholder="City or location"
             formControlName="location"
-          />
+            />
         </div>
         <div class="text-center">
           <button type="submit" class="btn btn-success btn-md" [disabled]="loading">
@@ -23,42 +23,54 @@
     <div class="col-md-6">
       <h3 class="text-center my-4">Weather Details</h3>
 
-      <div *ngIf="loading" class="text-center text-muted py-4">Loading weather…</div>
+      @if (loading) {
+        <div class="text-center text-muted py-4">Loading weather…</div>
+      }
 
-      <div *ngIf="errorMessage && !loading" class="alert alert-warning" role="alert">
-        {{ errorMessage }}
-      </div>
+      @if (errorMessage && !loading) {
+        <div class="alert alert-warning" role="alert">
+          {{ errorMessage }}
+        </div>
+      }
 
-      <div *ngIf="weatherData?.current && !loading && !errorMessage">
-        <p class="text-center">
-          Current:
-          {{
+      @if (weatherData?.current && !loading && !errorMessage) {
+        <div>
+          <p class="text-center">
+            Current:
+            {{
             weatherData?.current?.weather_descriptions &&
-              weatherData.current.weather_descriptions[0]
-          }}
-        </p>
-        <p class="text-center">
-          Temperature: {{ weatherData?.current?.temperature }} °C ({{
+            weatherData.current.weather_descriptions[0]
+            }}
+          </p>
+          <p class="text-center">
+            Temperature: {{ weatherData?.current?.temperature }} °C ({{
             (weatherData?.current?.temperature * 9) / 5 + 32 | number: '1.0-0'
-          }}
-          °F)
-        </p>
-        <p class="text-center">
-          Feels like: {{ weatherData?.current?.feelslike }} °C ({{
+            }}
+            °F)
+          </p>
+          <p class="text-center">
+            Feels like: {{ weatherData?.current?.feelslike }} °C ({{
             (weatherData?.current?.feelslike * 9) / 5 + 32 | number: '1.0-0'
-          }}
-          °F)
-        </p>
-        <p class="text-center" *ngIf="weatherData?.location">
-          Location: {{ weatherData.location.name
-          }}<span *ngIf="weatherData.location.region">, {{ weatherData.location.region }}</span>
-          {{ weatherData.location.country }}
-        </p>
+            }}
+            °F)
+          </p>
+          @if (weatherData?.location) {
+            <p class="text-center">
+              Location: {{ weatherData.location.name
+              }}@if (weatherData.location.region) {
+              <span>, {{ weatherData.location.region }}</span>
+            }
+            {{ weatherData.location.country }}
+          </p>
+        }
       </div>
+    }
 
-      <p *ngIf="!weatherData?.current && !loading && !errorMessage" class="text-center text-muted">
+    @if (!weatherData?.current && !loading && !errorMessage) {
+      <p class="text-center text-muted">
         Enter a location and search to see weather.
       </p>
-    </div>
+    }
   </div>
+</div>
 </div>
