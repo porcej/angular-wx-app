@@ -66,19 +66,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-wx-app:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.json",
+            "buildTarget": "angular-wx-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-wx-app:build:production"
+              "buildTarget": "angular-wx-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-wx-app:build"
+            "buildTarget": "angular-wx-app:build"
           }
         },
         "test": {
