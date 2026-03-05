@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApixuService {
+  private readonly baseUrl = environment.production
+    ? 'https://api.weatherstack.com/current'
+    : '/api/current';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getWeather(location){
-  	return this.http.get(
-  		'http://api.weatherstack.com/current?access_key=9ff98d461197d3eeba32327f459a3aa3&query=' + location
-  	);
+  getWeather(location: string): Observable<unknown> {
+    let params = new HttpParams().set('query', location);
+    if (environment.production) {
+      params = params.set('access_key', environment.weatherstackApiKey);
+    }
+    return this.http.get(this.baseUrl, { params });
   }
 }

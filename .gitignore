@@ -31,6 +31,11 @@ speed-measure-plugin*.json
 !.vscode/extensions.json
 .history/*
 
+# local env overrides (keep secrets out of repo)
+.env
+.env.local
+.env.*.local
+
 # misc
 /.sass-cache
 /connect.lock

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  /** Set in .env or replace with your key. Never commit real keys. */
+  weatherstackApiKey: 'YOUR_WEATHERSTACK_API_KEY',
 };
 
 /*
