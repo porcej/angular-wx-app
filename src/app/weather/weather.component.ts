@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ApixuService } from '../apixu.service';
 
 export interface WeatherResponse {
@@ -17,13 +17,13 @@ export interface WeatherResponse {
   styleUrls: ['./weather.component.css'],
 })
 export class WeatherComponent implements OnInit {
-  weatherSearchForm: FormGroup;
+  weatherSearchForm: UntypedFormGroup;
   weatherData: WeatherResponse | null = null;
   loading = false;
   errorMessage: string | null = null;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private apixuService: ApixuService
   ) {}
 
